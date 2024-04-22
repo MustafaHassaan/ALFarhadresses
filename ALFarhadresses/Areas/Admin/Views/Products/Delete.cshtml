@@ -1,0 +1,130 @@
+﻿@model ALFarhadresses.Models.Products
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout - Admin.cshtml";
+}
+@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment _env;
+@{
+    string folder = _env.ContentRootPath +
+"/wwwroot/Dresses/" + Model.Id;
+    List<System.IO.FileInfo> LOI = new List<System.IO.FileInfo>();
+}
+@if (System.IO.Directory.Exists(folder))
+{
+    string[] filesdir = System.IO.Directory.GetFiles(folder);
+    for (int i = 0; i < filesdir.Length; i++)
+    {
+        System.IO.FileInfo FI = new System.IO.FileInfo(filesdir[i]);
+        LOI.Add(FI);
+
+    }
+}
+<partial name="_Logo" />
+<div class="card" style="margin-bottom: 20px; margin-left: 20px; margin-right: 20px;">
+    <h5 style="color:white;" class="card-header bg-dark">
+        <div style="text-align-last: center;">
+            <h3>Are you sure you want to delete this Product ?</h3>
+        </div>
+    </h5>
+    <table style="margin-top: 20px; margin-bottom: 20px;">
+        <tbody>
+            <tr>
+                <td>
+                    <center>
+                        <div class="modal-body">
+                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="width: 300px; display: inline-block;">
+                                <ol class="carousel-indicators">
+                                    @for (int i = 0; i < LOI.Count; i++)
+                                    {
+                                        string style = "";
+                                        @if (i == 0)
+                                        {
+                                            style = "active";
+                                        }
+                                        <li data-target="#carouselExampleIndicators" data-slide-to="@i.ToString()" class="@style"></li>
+                                    }
+                                </ol>
+                                <div class="carousel-inner">
+                                    @{ int index = 0;}
+                                    @foreach (var img in LOI)
+                                    {
+                                        string style = "";
+                                        @if (index == 0)
+                                        {
+                                            style = "active";
+                                        }
+                                        <div class="carousel-item @style">
+                                            <img src="~/Dresses/@Model.Id/@img.Name" alt="@img.Name" style="width:300px;">
+                                        </div>
+                                        index++;
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </center>
+
+                </td>
+
+
+
+                <td>
+
+                    <div class="card-body">
+                        @*<form asp-action="Delete">*@
+                            <div>
+                                <dl class="dl-horizontal">
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.Name)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Name)
+                                    </dd>
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.Description)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Description)
+                                    </dd>
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.Price)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Price)
+                                    </dd>
+                                    <dt>
+                                        @Html.DisplayNameFor(model => model.CatNavigation)
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(model => model.CatNavigation.Name)
+                                    </dd>
+                                </dl>
+                            </div>
+                            <form asp-action="Delete">
+                                <input type="hidden" asp-for="Id" />
+                                <input type="submit" value="Delete" class="btn btn-primary" />
+                                <a asp-action="Index" class="btn btn-primary">Back to List</a>
+                            </form>
+                     </div>
+                </td>
+                @*</form>*@
+            </tr>
+        </tbody>
+    </table>
+  
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+

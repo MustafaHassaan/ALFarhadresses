@@ -1,0 +1,39 @@
+﻿@model Orders
+@{
+    ViewData["Title"] = "Cash";
+}
+<partial name="_Logo" />
+<center>
+    @if (ViewBag.Msg != null)
+    {
+        <div class="alert alert-dark" role="alert" style="width:350px;">
+            @ViewBag.Msg
+        </div>
+    }
+</center>
+<form asp-action="Cash" method="post">
+    <div class="container-fluid" style=" width: 600px; height: 450px; border-radius: 10px; margin-bottom: 20px;">
+        <div class="creditCardForm">
+            <div class="heading">
+                <h1>Confirm Purchase</h1>
+                <input type="hidden" value="@ViewBag.userId" name="Custid" />
+            </div>
+            <div class="payment">
+                <div class="form-group owner">
+                    <label>Phone</label>
+                    <span asp-validation-for="Phone" style="color:red;"></span>
+                    <input asp-for="Phone" type="tel" name="Phone" class="form-control" placeholder="Phone...">
+                </div>
+                <div class="form-group">
+                    <label>Shipp Address</label>
+                    <span asp-validation-for="ShipAddress" style="color:red;"></span>
+                    <textarea asp-for="ShipAddress" name="Address" class="form-control" placeholder="ShippAddress..." style="height:200px;"></textarea>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">
+            Done
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </button>
+    </div>
+</form>

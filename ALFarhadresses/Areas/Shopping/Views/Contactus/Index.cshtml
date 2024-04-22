@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ALFarhadresses.Models.Contactus>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout - Admin.cshtml";
+}
+<partial name="_Logo" />
+<div class="card" style="margin-bottom: 20px;">
+    <h5 class="card-header bg-dark" style="color: white;">
+        All Notifictions
+        <div style="width: 200px; text-align-last: center; font-size: 18px; margin-top: 7px;">
+        </div>
+    </h5>
+    <div class="card-body">
+        <center>
+            <table class="table table-hover table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Quistion ?</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">
+                            Actions
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Phone)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Quistion)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                            <td>
+
+                                <a asp-action="Edit" asp-route-id="@item.Id" style="color:white;text-decoration:none;">
+                                    <i class="fas fa-edit" style="color:white;text-decoration:none;"></i>
+                                </a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id" style="color:white;text-decoration:none;">
+                                    <i class="fa fa-trash" style="color:white"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <center>
+                <a asp-area="Admin" asp-controller="Products" asp-action="Index" class="btn btn-primary">Back</a>
+            </center>
+
+        </center>
+    </div>
+</div>

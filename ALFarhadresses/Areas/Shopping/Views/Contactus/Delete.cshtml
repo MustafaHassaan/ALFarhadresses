@@ -1,0 +1,28 @@
+﻿@model ALFarhadresses.Models.Contactus
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout - Admin.cshtml";
+}
+<partial name="_Logo" />
+<div class="card" style="margin-bottom: 101px; margin-left: 20px; margin-right: 20px;">
+    <h5 style="color:white;" class="card-header bg-dark">
+        <div style="text-align-last: center;">
+            <h3>Are you sure you want to delete this Notifiction ?</h3>
+        </div>
+    </h5>
+    <div class="card-body">
+        <form asp-action="Delete">
+            <center>
+                <div>
+                    <dl class="dl-horizontal" style="font-size:25px;">
+                        <dd>
+                            @Html.DisplayFor(model => model.Quistion)
+                        </dd>
+                    </dl>
+                </div>
+            </center>
+            <input type="submit" value="yes" class="btn btn-primary" />
+            <a asp-action="Index" class="btn btn-primary">No</a>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,126 @@
+﻿@model ALFarhadresses.Models.Customers
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout - Admin.cshtml";
+}
+<partial name="_Logo" />
+<form asp-action="Edit">
+    <center>
+        <div style="width: 50%; margin-top: 20px ; margin-bottom: 20px;">
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Fname" for="validationDefault01">First Name</label>
+                    <input asp-for="Fname" type="text" class="form-control" id="validationDefault01" placeholder="First name">
+                    <span asp-validation-for="Fname" style="color:red;"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Lname" for="validationDefault01">Last Name</label>
+                    <input asp-for="Lname" type="text" class="form-control" id="validationDefault01" placeholder="First name">
+                    <span asp-validation-for="Lname" style="color:red;"></span>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label asp-for="Email" for="validationDefaultUsername">Email</label>
+                    <input asp-for="Email" type="email" class="form-control" readonly placeholder="Email" style="cursor:no-drop">
+                    <span asp-validation-for="Email" style="color:red;"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" readonly style="cursor:no-drop" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Phone" for="inputPassword3">Phone</label>
+                    <input asp-for="Phone" type="text" class="form-control" id="inputPassword3" placeholder="Password">
+                    <span asp-validation-for="Phone" style="color:red;"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Gender" for="validationDefaultUsername">Gender</label>
+                    <select asp-for="Gender" class="form-control">
+                        <option selected disabled>Gender</option>
+                        <option value="Mal">Mal</option>
+                        <option value="Femal">Femal</option>
+                    </select>
+                    <span asp-validation-for="Gender" style="color:red;"></span>
+                </div>
+
+
+
+
+
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="City" for="validationDefaultUsername">City</label>
+                    <select asp-for="City" class="form-control">
+                        <option selected disabled>City</option>
+                        <option value="Giza">Giza</option>
+                        <option value="Menia">Menia</option>
+                        <option value="Suze">Suze</option>
+                        <option value="Al-Aqsor">Al-Aqsor</option>
+                        <option value="Alexandria">Alexandria</option>
+                        <option value="Por said">Por said</option>
+                        <option value="Damietta">Damietta</option>
+                        <option value="Aswan">Aswan</option>
+                        <option value="Kaliobeya">Kaliobeya</option>
+                        <option value="Bani Sweif">Bani Sweif</option>
+                        <option value="Ismailia">Ismailia</option>
+                        <option value="Sohag">Sohag</option>
+                        <option value="Asyut">Asyut</option>
+                        <option value="Al bahr Al Ahmer">Al bahr Al Ahmer</option>
+                        <option value="El behaira">El behaira</option>
+                        <option value="Dakahlia">Dakahlia</option>
+                        <option value="Ghrbia">Ghrbia</option>
+                        <option value="Fayoum">Fayoum</option>
+                        <option value="Kafr ElShikh">Kafr ElShikh</option>
+                        <option value="Matrouh">Matrouh</option>
+                        <option value="Monoufia">Monoufia</option>
+                        <option value="El wady elgdid">El wady elgdid</option>
+                        <option value="6 October">6 October</option>
+                        <option value="Qena">Qena</option>
+                        <option value="Soyth Sinai">Soyth Sinai</option>
+                        <option value="North Sinai">North Sinai</option>
+                        <option value="Helwan">Helwan</option>
+                        <option value="Sharqiya">Sharqiya</option>
+                    </select>
+                    <span asp-validation-for="City" style="color:red;"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address">Address</label>
+                <textarea class="form-control" asp-for="Address"></textarea>
+                <span asp-validation-for="Address" style="color:red;"></span>
+            </div>
+            <center>
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label>
+                            <input asp-for="Admin" /> @Html.DisplayNameFor(model => model.Admin)
+                        </label>
+                    </div>
+                </div>
+            </center>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+            <input type="submit" asp-action="Index" value="Back To List" class="btn btn-primary" />
+        </div>
+    </center>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

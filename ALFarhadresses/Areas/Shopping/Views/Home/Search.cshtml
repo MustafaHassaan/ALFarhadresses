@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewData["Title"] = "Search";
+}
+@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment _env;
+<center>
+    @if (ViewBag.Pro != null)
+    {
+        foreach (var Content in ViewBag.Pro)
+        {
+            <div class="card" style="width: 18rem; margin-top: 50px; margin-bottom: 20px; display: inline-block; position: relative; ">
+                @{
+                    string folder = _env.ContentRootPath +
+                    "/wwwroot/Dresses/" + Content.Id;
+                    if (System.IO.Directory.Exists(folder))
+                    {
+                        string[] filesdir = System.IO.Directory.GetFiles(folder);
+                        for (int i = 0; i < filesdir.Length; i++)
+                        {
+                            System.IO.FileInfo FI = new System.IO.FileInfo(filesdir[i]);
+                            <a asp-controller="Home" asp-action="opencart" asp-route-id="@Content.Id">
+                                <img style="width:286px;" src="~/Dresses/@Content.Id/@FI.Name">
+                            </a>
+                            break;
+                        }
+                    }
+                }
+
+                <div class="card-body">
+                    <a asp-controller="Home" asp-action="opencart" asp-route-id="@Content.Id" style="text-decoration: none; color:black;">
+                        <h5 style="text-align:left;">@Content.Name</h5>
+                    </a>
+                    <div style="width:250px; height:100px; overflow:auto;">
+                        <p style="text-align: left; margin-top: 5px;" class="Pr">
+                            @Content.Description
+                        </p>
+
+                        <p style="text-align: left; margin-top: 5px;">
+                            @Content.Price
+                        </p>
+
+                        @{
+                            ViewBag.ProId = Content.Id;
+                            ViewBag.ProCi = Content.Cat;
+
+                        }
+
+                    </div>
+                    @if (!string.IsNullOrEmpty(ViewBag.userFname))
+                    {
+                        <partial name="_Rate" />
+                    }
+                </div>
+                <a asp-controller="Home" asp-action="opencart" asp-route-id="@Content.Id" style="text-decoration: none; margin-bottom:10px;" class="btn btn-primary">
+                    Show Product
+                </a>
+            </div>
+
+        }
+
+    }
+</center>

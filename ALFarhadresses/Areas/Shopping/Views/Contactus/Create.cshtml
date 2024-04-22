@@ -1,0 +1,45 @@
+﻿@model ALFarhadresses.Models.Contactus
+@{
+    ViewData["Title"] = "Create";
+}
+<partial name="_Logo" />
+<center>
+    <h2>Contact Us</h2>
+    @if (ViewBag.Msg != null)
+    {
+        <div class="alert alert-dark" role="alert" style="width:700px; color:white;">
+            @ViewBag.Msg
+        </div>
+    }
+    <form asp-action="Create" method="post" style="width: 500px;">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="Phone" class="control-label"></label>
+            <input asp-for="Phone" class="form-control" />
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Quistion" class="col-form-label">Your Masseage :</label>
+            <textarea asp-for="Quistion" class="form-control" id="message-text" style="height: 150px;"></textarea>
+            <span asp-validation-for="Quistion" class="text-danger"></span>
+        </div>
+        <input type="hidden" asp-for="Status" value="Pinding" />
+        <button class="btn btn-primary" type="submit" style="margin-bottom: 20px;">
+            Send
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-send"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+
+        </button>
+    </form>
+
+</center>

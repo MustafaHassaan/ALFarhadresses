@@ -1,0 +1,132 @@
+﻿@model Orders
+@{
+    ViewData["Title"] = "Cash";
+}
+<partial name="_Logo" />
+
+<form asp-action="Visa" method="post">
+    <center>
+        <h1>Detailes Of Visa</h1>
+            @if (ViewBag.Msg != null)
+            {
+                <div class="alert alert-dark" role="alert" style="width:350px;">
+                    @ViewBag.Msg
+                </div>
+            }
+        <input type="hidden" value="@ViewBag.userId" name="Custid" />
+        <table style="margin-top: 20px;">
+            <tr>
+                <td>
+
+
+
+                    <div style="margin-bottom: 100px; margin-top: 5px; margin-left: 20px; width: 400px; height: 350px; display: inline-block;">
+                        <div>
+                            <label>Bank Name</label>
+                            <input asp-for="BankName" type="text" class="form-control" placeholder="Bank Name...">
+                        </div>
+                        <div style="margin-top:20px;">
+                            <label>Pin</label>
+                            <input asp-for="Pin" type="text" maxlength="4" class="form-control" placeholder="Pin...">
+                        </div>
+                        <div style="margin-top:20px;">
+                            <label>Card Number</label>
+                            <input asp-for="CardNumber" type="text" maxlength="16" class="form-control" placeholder="Card Number...">
+                        </div>
+                        <div class="form-row" style="margin-top:20px;">
+                            <div class="col-md-6 mb-3">
+                                <label>Expiration Date</label>
+                                <select asp-for="ExpirationDate" class="form-control">
+                                    <option value="January">January</option>
+                                    <option value="February">February</option>
+                                    <option value="March">March</option>
+                                    <option value="April">April</option>
+                                    <option value="May">May</option>
+                                    <option value="June">June</option>
+                                    <option value="July">July</option>
+                                    <option value="August">August</option>
+                                    <option value="September">September</option>
+                                    <option value="October">October</option>
+                                    <option value="November">November</option>
+                                    <option value="December">December</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <select asp-for="ExpirationDate" class="form-control" style="margin-top:32px;">
+                                    <option value="2016"> 2016</option>
+                                    <option value="2017"> 2017</option>
+                                    <option value="2018"> 2018</option>
+                                    <option value="2019"> 2019</option>
+                                    <option value="2020"> 2020</option>
+                                    <option value="2021"> 2021</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button style="margin-top: 10px;" class="btn btn-primary" type="button" id="e">
+                            Next Step
+                        </button>
+                    </div>
+
+
+
+                </td>
+
+
+
+
+                <td>
+
+
+
+                    <div style="width: 600px; margin-top: -190px ;margin-left: 50px; margin-bottom: 20px; display:none;" id="te">
+                        <div class="form-row">
+                            <div style="margin-bottom:13px;">
+                                <label>Phone</label>
+                                <span asp-validation-for="Phone" style="color:red;"></span>
+                                <input asp-for="Phone" type="tel" name="Phone" class="form-control" style="width:350px;" placeholder="Phone...">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div style="margin-top:10px;">
+                                <label>ShippAddress</label>
+                                <span asp-validation-for="ShipAddress" style="color:red;"></span>
+                                <textarea asp-for="ShipAddress" name="Address" class="form-control" placeholder="ShippAddress..." style="width:350px;"></textarea>
+                            </div>
+                        </div>
+
+                        <button style="margin-top: 10px;" class="btn btn-primary" type="submit" id="e">
+                            Done
+                        </button>
+                    </div>
+
+
+
+                </td>
+            </tr>
+        </table>
+    </center>
+</form>
+
+<script type="text/javascript">
+        $(document).ready(function () {
+            $("#e").click(function () {
+                $("#te").show();
+            });
+            $("#btn").click(function () {
+                var msg = $("#TFN").val();
+                $("#FN").text(msg);
+                var msg = $("#TEmail").val();
+                $("#Email").text(msg);
+                var msg = $("#TPs").val();
+                $("#Ps").text(msg);
+                var select = $("#TGender").val();
+                $("#Gender").text(select);
+                var select = $("#TCuntry").val();
+                $("#Cuntry").text(select);
+
+            });
+        });
+
+    </script>
+
+

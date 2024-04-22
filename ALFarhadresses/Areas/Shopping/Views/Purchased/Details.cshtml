@@ -1,0 +1,128 @@
+﻿@model ALFarhadresses.Models.Orders
+@inject ALFarhadressesContext _Con;
+@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment _env;
+@{
+    ViewData["Title"] = "Details";
+}
+
+<partial name="_Logo" />
+<table class="table table-dark" style="width: 97%; margin-right: 20px; margin-left: 23px; margin-bottom: 157px;">
+    <thead>
+        <tr>
+            <th scope="col">Photo</th>
+            <th scope="col">Discriebtion</th>
+            <th scope="col">
+                <center>
+                    Quantity
+                </center>
+            </th>
+            <th scope="col">
+                <center>
+                    Price
+                </center>
+            </th>
+            <th scope="col">
+                <center>
+                    Sub Tottal
+                </center>
+            </th>
+        </tr>
+    </thead>
+    <tbody id="b">
+        @{
+            decimal Tottal = 0;
+            @foreach (var item in Model.Orderitem)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="opencart" asp-controller="Home" asp-route-id="@item.ProNavigation.Id">
+                            @{
+
+                                string folder = _env.ContentRootPath +
+                                    "/wwwroot/Dresses/" + item.ProNavigation.Id;
+
+                                if (System.IO.Directory.Exists(folder))
+                                {
+                                    string[] filesinDir = System.IO.Directory.GetFiles(folder);
+                                    for (int j = 0; j < filesinDir.Length; j++)
+                                    {
+                                        System.IO.FileInfo fileinfo = new System.IO.FileInfo(filesinDir[j]);
+
+                                        <img class="img-thumbnail" width="100px" height="100px" src="~/Dresses/@item.ProNavigation.Id/@fileinfo.Name" alt="">
+
+                                        break;
+                                    }
+                                }
+
+                            }
+                        </a>
+                    </td>
+                    <td>
+                        @item.ProNavigation.Description
+                    </td>
+                    <td>
+                        @item.Quantity
+                    </td>
+                    <td>
+                        @item.ProNavigation.Price
+                    </td>
+                    <td>
+                        <center>
+                            @{
+                                var SubTottal = item.ProNavigation.Price * item.Quantity;
+                                Tottal += SubTottal;
+                            }
+                            @SubTottal
+                        </center>
+                    </td>
+                </tr>
+
+            }
+
+
+
+
+                <tr>
+                    <td>
+                        Shipping charges 0.2 Therefore, the total amount shall be calculated as
+                    </td>
+                    <td>
+                        @{ 
+                            var All = Convert.ToDecimal(Model.Fees) * Tottal;
+                            var Result = All + Tottal;
+                        }
+                    </td>
+                    <td></td>
+                    <td>
+                        Tottal
+                    </td>
+                    <td>
+                        <center>
+                            @Tottal
+                        </center>
+                    </td>
+                </tr>
+        }
+        <tr>
+            <td>
+                <h4>
+                    <center>
+                        Status
+                    </center>
+                </h4>
+            </td>
+            <td>
+                <h5>
+                    @Model.Status
+                </h5>
+            </td>
+            <td></td>
+            <td>
+                By charges
+            </td>
+            <td>
+                @Result
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Shared/_Layout - Admin.cshtml";
+}
+<partial name="_Logo">
+    <!-- Body -->
+    <form asp-action="Profile" method="post">
+        <table style="margin-top: 20px;margin-left: 150px;">
+            <tr>
+                <td>
+
+
+
+                    <div style="margin-bottom: 20px; margin-top: 5px; margin-left: 20px; width: 400px; height: 350px; display: inline-block;">
+                        <div>
+                            <h4>
+                                FullName : @ViewBag.userFname @ViewBag.userLname
+                            </h4>
+                        </div>
+                        <hr>
+                        <div>
+                            <h4>
+                                Email : @ViewBag.userEmail
+                            </h4>
+                            <hr />
+                            <h4>
+                                Password : @ViewBag.userPassword
+                            </h4>
+                        </div>
+                        <hr>
+                        <div>
+                            <h4>
+                                Gender : @ViewBag.userGender
+                            </h4>
+                        </div>
+                        <hr>
+                        <div>
+                            <h4>
+                                City : @ViewBag.userCity
+                            </h4>
+                        </div>
+                        <hr>
+                        <div>
+                            <h4>
+                                Address : @ViewBag.userAddress
+                            </h4>
+                        </div>
+                        <hr>
+
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <center>
+            <form asp-action="Edit" method="get">
+                <input type="hidden" name="id" value="@ViewBag.userId" />
+                <input type="submit" value="Edit" class="btn btn-primary" style="margin-bottom:20px; margin-top:20px;" />
+            </form>
+        </center>
+    </form>
+

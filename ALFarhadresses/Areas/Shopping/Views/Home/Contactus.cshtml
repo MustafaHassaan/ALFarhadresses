@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Contact";
+}
+<partial name="_Logo" />
+<center>
+    <h2>Contact Us</h2>
+    <form style="width: 500px;">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputEmail4">Name</label>
+                <input type="text" class="form-control" id="inputEmail4" placeholder="Name">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputPassword4">Email</label>
+                <input type="email" class="form-control" id="inputPassword4" placeholder="Email">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputAddress">Phone</label>
+            <input type="text" class="form-control" id="inputAddress" placeholder="Phone">
+        </div>
+        <div class="form-group">
+            <label for="message-text" class="col-form-label">Your Masseage :</label>
+            <textarea class="form-control" id="message-text" style="height: 150px;"></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit" style="margin-bottom: 20px;">
+            Send
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-send"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+
+        </button>
+    </form>
+
+</center>

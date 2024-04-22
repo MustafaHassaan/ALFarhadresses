@@ -1,0 +1,62 @@
+﻿@model ALFarhadresses.Models.Orders
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout - Admin.cshtml";
+}
+<partial name="_Logo" />
+<form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+    <center>
+        <div style="width: 50%; margin-top: 20px ; margin-bottom: 20px;">
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Payment" for="validationDefault01">Payment</label>
+                    <input asp-for="Payment" type="text" class="form-control" id="validationDefault01" placeholder="Payment" readonly style="cursor:no-drop">
+                    <span asp-validation-for="Payment" style="color:red;"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Date" for="validationDefault01">Date</label>
+                    <input asp-for="Date" type="date" class="form-control" id="validationDefault01" placeholder="Date" readonly style="cursor:no-drop">
+                    <span asp-validation-for="Date" style="color:red;"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Phone" for="validationDefaultUsername">Phone</label>
+                    <input asp-for="Phone" type="tel" class="form-control" readonly placeholder="Phone" style="cursor:no-drop">
+                    <span asp-validation-for="Phone" style="color:red;"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Fees" for="validationDefaultUsername">Fees</label>
+                    <input asp-for="Fees" type="text" class="form-control" readonly placeholder="Fees" style="cursor:no-drop">
+                    <span asp-validation-for="Fees" style="color:red;"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Cust" for="inputPassword3">Cust</label>
+                    <input asp-for="Cust" type="text" class="form-control" id="inputPassword3" placeholder="Cust" readonly style="cursor:no-drop">
+                    <span asp-validation-for="Cust" style="color:red;"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Status" for="validationDefaultUsername">Status</label>
+                    <select asp-for="Status" class="form-control">
+                        <option value="InProcess" selected>InProcess</option>
+                        <option value="shipped">shipped</option>
+                        <option value="Delivered">Delivered</option>
+                    </select>
+                    <span asp-validation-for="Status" style="color:red;"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="ShipAddress">Address</label>
+                <textarea class="form-control" asp-for="ShipAddress"  readonly style="cursor:no-drop"></textarea>
+                <span asp-validation-for="ShipAddress" style="color:red;"></span>
+            </div>
+            <center>
+            </center>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a class="btn btn-primary" asp-action="Profile">Back</a>
+            </div>
+        </div>
+    </center>
+</form>

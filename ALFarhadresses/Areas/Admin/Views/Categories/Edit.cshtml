@@ -1,0 +1,34 @@
+﻿@model ALFarhadresses.Models.Categories
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout - Admin.cshtml";
+}
+
+<partial name="_Logo" />
+<div class="card" style="margin-bottom: 20px; margin-left: 20px; margin-right: 20px;">
+    <h5 style="color:white;" class="card-header bg-dark">
+        <div style="text-align-last: center;">
+            <h3>Are you sure you want to edit this Category ?</h3>
+        </div>
+    </h5>
+    <div class="card-body">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <center>
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" style="width:350px;" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                    <input type="hidden" asp-for="Id" />
+                </center>
+            </div>
+            <center>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <a asp-action="MgCategory" class="btn btn-primary">No</a>
+                </div>
+            </center>
+        </form>
+    </div>
+</div>

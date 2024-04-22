@@ -1,0 +1,114 @@
+﻿@model ALFarhadresses.Models.Products
+@{
+    ViewData["Title"] = "opencart";
+    Layout = "~/Views/Shared/_Layout - Admin.cshtml";
+}
+@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment _env;
+@{
+    string folder = _env.ContentRootPath +
+"/wwwroot/Dresses/" + Model.Id;
+    List<System.IO.FileInfo> LOI = new List<System.IO.FileInfo>();
+}
+@if (System.IO.Directory.Exists(folder))
+{
+    string[] filesdir = System.IO.Directory.GetFiles(folder);
+    for (int i = 0; i < filesdir.Length; i++)
+    {
+        System.IO.FileInfo FI = new System.IO.FileInfo(filesdir[i]);
+        LOI.Add(FI);
+
+    }
+}
+<center>
+    <div class="card" style="margin-bottom: 20px; margin-left: 20px; margin-right: 20px;margin-top:50px;">
+        <h5 style="color:white;" class="card-header bg-dark">
+            <div style="text-align-last: center;">
+                <h3>@Model.Name</h3>
+            </div>
+        </h5>
+        <div class="card-body">
+            <div>
+                <center>
+                    <table style="margin-top: 20px; margin-bottom: 20px;">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="modal-body">
+                                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="width: 300px; display: inline-block;">
+                                            <ol class="carousel-indicators">
+                                                @for (int i = 0; i < LOI.Count; i++)
+                                                {
+                                                    string style = "";
+                                                    @if (i == 0)
+                                                    {
+                                                        style = "active";
+                                                    }
+                                                    <li data-target="#carouselExampleIndicators" data-slide-to="@i.ToString()" class="@style"></li>
+                                                }
+                                            </ol>
+                                            <div class="carousel-inner">
+                                                @{ int index = 0;}
+                                                @foreach (var img in LOI)
+                                                {
+                                                    string style = "";
+                                                    @if (index == 0)
+                                                    {
+                                                        style = "active";
+                                                    }
+                                                    <div class="carousel-item @style">
+                                                        <img src="~/Dresses/@Model.Id/@img.Name" alt="@img.Name" style="width:300px;">
+                                                    </div>
+                                                    index++;
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
+                                </td>
+
+
+
+                                <td>
+                                    <div style="margin-top: 1px; overflow:auto;">
+                                        <h3>Name :</h3>
+                                        @Model.Name
+                                    </div>
+                                    <div style=" margin-top: 5px; display: inline-block;">
+                                        <div style="margin-top: 1px; overflow:auto;">
+                                            <h3>Description :</h3>
+                                            @Model.Description
+                                        </div>
+                                        <div>
+                                            <h3>Price :</h3>
+                                            @Model.Price
+                                        </div>
+                                    </div>
+                                    <div style="margin-top: 10px;">
+                                        <a asp-controller="Products" asp-action="Delete" asp-route-id="@Model.Id" style="text-decoration: none; margin-bottom:10px;" class="btn btn-primary">
+                                            Delete
+                                        </a>
+                                        <a asp-controller="Products" asp-action="Edit" asp-route-id="@Model.Id" style="text-decoration: none; margin-bottom:10px;" class="btn btn-primary">
+                                            Edit
+                                        </a>
+                                        <a asp-controller="Products" asp-action="AllProduct" asp-route-id="@Model.Id" style="text-decoration: none; margin-bottom:10px;" class="btn btn-primary">
+                                            Back To List
+                                        </a>
+                                        <a asp-controller="Products" asp-action="Index" asp-route-id="@Model.Id" style="text-decoration: none; margin-bottom:10px;" class="btn btn-primary">
+                                            Back To Shop
+                                        </a>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </center>
+            </div>
+
+        </div>
+    </div>
+</center>

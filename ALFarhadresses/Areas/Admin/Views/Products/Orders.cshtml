@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewData["Title"] = "orders";
+    Layout = "~/Views/Shared/_Layout - Admin.cshtml";
+}
+<partial name="_Logo" />
+<div class="card" style="margin-bottom: 20px;">
+    <h5 class="card-header bg-dark" style="color: white;">
+        All Orders
+        <div style="width: 200px; text-align-last: center; font-size: 18px; margin-top: 7px;">
+        </div>
+    </h5>
+    <div class="card-body">
+        <center>
+            <table class="table table-hover table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Actions</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">
+                            <!--  file:///C:/Users/Mustafa/OneDrive/Desktop/GDG  -->
+                            <div class="checkbox">
+                                <input type="checkbox" id="checkall1" class="btn btn-link" value="Un/check All" style="margin-top: -3px;">Un/check All
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <center>
+                <a  asp-controller="Categories" asp-action="Index" class="btn btn-primary">Back</a>
+                <a href="#" class="btn btn-primary">Delete Selected</a>
+            </center>
+
+        </center>
+    </div>
+</div>
+

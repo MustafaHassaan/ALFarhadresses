@@ -1,0 +1,62 @@
+﻿@model IEnumerable<ALFarhadresses.Models.Orderitem>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+<input type="text" value="@ViewBag.userId" name="custid" />
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CatNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Order)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProNavigation)
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CatNavigation.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.ShipAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProNavigation.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Order.Status)
+                <input type="text" asp-for="@item.Order.Cust" />
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

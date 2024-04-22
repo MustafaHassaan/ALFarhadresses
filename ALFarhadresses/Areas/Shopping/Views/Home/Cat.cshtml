@@ -1,0 +1,115 @@
+﻿@model List<ALFarhadresses.Models.Products>
+@{
+    ViewData["Title"] = "CatList";
+}
+@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment _env;
+<style>
+    .pagination {
+        display: inline-block;
+    }
+
+        .pagination a {
+            color: ThreeDDarkShadow;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+        }
+
+            .pagination a.active {
+                background-color: ThreeDDarkShadow;
+                color: whitesmoke;
+                border-radius: 20px;
+            }
+
+            .pagination a:hover:not(.active) {
+                background-color: ThreeDDarkShadow;
+                color: whitesmoke;
+                border-radius: 20px;
+            }
+</style>
+<center>
+    <h2>@ViewBag.CC.Name</h2>
+    @foreach (var Content in Model)
+    {
+        <div class="card" style="width: 18rem;margin-bottom: 20px; display: inline-block; position: relative; ">
+            @{
+                string folder = _env.ContentRootPath +
+                "/wwwroot/Dresses/" + Content.Id;
+                if (System.IO.Directory.Exists(folder))
+                {
+                    string[] filesdir = System.IO.Directory.GetFiles(folder);
+                    for (int i = 0; i < filesdir.Length; i++)
+                    {
+                        System.IO.FileInfo FI = new System.IO.FileInfo(filesdir[i]);
+                        <a asp-controller="Home" asp-action="opencart" asp-route-id="@Content.Id">
+                            <img style="width:286px;" src="~/Dresses/@Content.Id/@FI.Name">
+                        </a>
+                        break;
+                    }
+                }
+            }
+
+            <div class="card-body">
+                <a asp-controller="Home" asp-action="opencart" asp-route-id="@Content.Id" style="text-decoration: none; color:black;">
+                    <h5 style="text-align:left;">@Content.Name</h5>
+                </a>
+                <div style="width:250px; height:100px; overflow:auto;">
+                    <p style="text-align: left; margin-top: 5px;" class="Pr">
+                        @Content.Description
+                    </p>
+
+                    <p style="text-align: left; margin-top: 5px;">
+                        @Content.Price
+                    </p>
+
+                    @{
+                        ViewBag.ProId = Content.Id;
+                        ViewBag.ProCi = Content.Cat;
+
+                    }
+
+                </div>
+                @if (!string.IsNullOrEmpty(ViewBag.userFname))
+                {
+                    <partial name="_Rate" />
+                }
+            </div>
+            <a asp-controller="Home" asp-action="opencart" asp-route-id="@Content.Id" style="text-decoration: none; margin-bottom:10px;" class="btn btn-primary">
+                Show Product
+            </a>
+        </div>
+
+    }
+    <br />
+    <div class="pagination">
+        @{
+            double PS = ViewBag.PS;
+            double Tottal = ViewBag.Tottal;
+            double PN = ViewBag.PN;
+            double NOP = Math.Ceiling(Tottal / PS);
+            string style = "";
+        }
+        @if (PN > 1)
+        {
+            <a asp-action="Index" asp-route-PN="@(PN - 1)" class="P">&laquo;</a>
+        }
+        @for (int i = 0; i < NOP; i++)
+        {
+            if (i + 1 == PN)
+            {
+                style = "active";
+            }
+            else
+            {
+                style = "";
+            }
+
+            <a class="@style" asp-action="Index" asp-route-PN="@(i+1)">@(i + 1)</a>
+        }
+        @if (PN + 1 <= NOP)
+        {
+            <a asp-action="Index" asp-route-PN="@(PN + 1)" class="N">&raquo;</a>
+        }
+    </div>
+</center>
+

@@ -1,0 +1,39 @@
+﻿<style type="text/css">
+    .RatingHart:hover, .text-danger {
+        cursor: pointer;
+    }
+</style>
+<form asp-action="Rate">
+    <input type="hidden" value="@ViewBag.userId" name="Cust" />
+    <button type="submit" class="btn btn-primary" style="width:30px; padding:2px; height:30px; border-radius:15px;">
+        <i class="fas fa-check"></i>
+    </button>
+    <span class="text-danger">
+        <i class="RatingHart far fa-heart" data-value="1"></i>
+        <i class="RatingHart far fa-heart" data-value="2"></i>
+        <i class="RatingHart far fa-heart" data-value="3"></i>
+        <i class="RatingHart far fa-heart" data-value="4"></i>
+        <i class="RatingHart far fa-heart" data-value="5"></i>
+    </span>
+    <input type="hidden" name="RN" class="Rv" />
+    <input type="hidden" name="ProId" class='PI@(ViewBag.ProId)' />
+    <input type="hidden" name="ProCi" class='CI@(ViewBag.ProCi)' />
+</form>
+<script>
+    $(".RatingHart").click(function () {
+        $(".RatingHart").addClass("far").removeClass("fas");
+        $(this).addClass("fas").removeClass("far");
+        $(this).prevAll(".RatingHart").addClass("fas").removeClass("far");
+
+    });
+
+
+    $(".RatingHart").click(function () {
+        var Hv = $(this).attr("data-value");
+        $(".Rv").val(Hv);
+        $(".PI@(ViewBag.ProId)").val(@ViewBag.ProId)
+        $(".CI@(ViewBag.ProCi)").val(@ViewBag.ProCi)
+    });
+
+
+</script>

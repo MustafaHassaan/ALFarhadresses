@@ -1,0 +1,130 @@
+﻿@model ALFarhadresses.Models.Products
+@{
+    ViewData["Title"] = "opencart";
+}
+@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment _env;
+@{
+    string folder = _env.ContentRootPath +
+    "/wwwroot/Dresses/" + Model.Id;
+    List<System.IO.FileInfo> LOI = new List<System.IO.FileInfo>();
+}
+@if (System.IO.Directory.Exists(folder))
+{
+    string[] filesdir = System.IO.Directory.GetFiles(folder);
+    for (int i = 0; i < filesdir.Length; i++)
+    {
+        System.IO.FileInfo FI = new System.IO.FileInfo(filesdir[i]);
+        LOI.Add(FI);
+
+    }
+}
+<center>
+    <form asp-action="opencart" method="post">
+        <input type="hidden" name="Custid" value="@ViewBag.userId" />
+        <input type="hidden" name="Proid" value="@Model.Id" />
+        <input type="hidden" name="Catid" value="@Model.Cat" />
+        <div class="card" style="margin-bottom: 20px; margin-left: 20px; margin-right: 20px; margin-top:50px;">
+            <h5 style="color:white;" class="card-header bg-dark">
+                <div style="text-align-last: center;">
+                    <h3>@Model.Name</h3>
+                </div>
+            </h5>
+            <div class="card-body">
+                <div>
+                    <center>
+                        @if (ViewBag.Msg != null)
+                        {
+                            <div class="alert alert-dark" role="alert" style="width:450px;">
+                                @ViewBag.Msg
+                            </div>
+                        }
+                        <table style="margin-top: 20px; margin-bottom: 20px;">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="modal-body">
+                                            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="width: 300px; display: inline-block;">
+                                                <ol class="carousel-indicators">
+                                                    @for (int i = 0; i < LOI.Count; i++)
+                                                    {
+                                                        string style = "";
+                                                        @if (i == 0)
+                                                        {
+                                                            style = "active";
+                                                        }
+                                                        <li data-target="#carouselExampleIndicators" data-slide-to="@i.ToString()" class="@style"></li>
+                                                    }
+                                                </ol>
+                                                <div class="carousel-inner">
+                                                    @{ int index = 0;}
+                                                    @foreach (var img in LOI)
+                                                    {
+                                                        string style = "";
+                                                        @if (index == 0)
+                                                        {
+                                                            style = "active";
+                                                        }
+                                                        <div class="carousel-item @style">
+                                                            <img src="~/Dresses/@Model.Id/@img.Name" alt="@img.Name" style="width:300px;">
+                                                        </div>
+                                                        index++;
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+
+                                    </td>
+
+
+
+                                    <td>
+                                        <div style="margin-top: 1px; overflow:auto;">
+                                            <h3>Name :</h3>
+                                            @Model.Name
+                                        </div>
+                                        <div style=" margin-top: 5px; display: inline-block;">
+                                            <div style="margin-top: 1px; overflow:auto;">
+                                                <h3>Description :</h3>
+                                                @Model.Description
+                                            </div>
+                                            <div>
+                                                <h3>Price :</h3>
+                                                @Model.Price
+                                            </div>
+                                            <div>
+
+                                                <h3>Ammount :</h3>
+                                                @Model.Ammount
+                                            </div>
+                                            <div>
+                                                <h3>Quantity :</h3>
+                                                <input name="Qty" type="number" min="1" max="12" class="btn btn-primary" asp-for="Quantity" />
+                                            </div>
+                                        </div>
+                                        <div style="margin-top: 10px;">
+                                            <button class="btn btn-primary" type="submit" style="margin-top:10px;" asp-action="Index" asp-controller="Home">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-skip-back"><polygon points="19 20 9 12 19 4 19 20"></polygon><line x1="5" y1="19" x2="5" y2="5"></line></svg>
+
+                                                Back
+                                            </button>
+                                            <button asp-action="Opencart" asp-area="Shopping" asp-controller="Home" class="btn btn-primary" type="submit" style="margin-top:10px;">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart" style="margin-left: 5px;"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                                                Add To Cart
+                                            </button>
+
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </form>
+</center>

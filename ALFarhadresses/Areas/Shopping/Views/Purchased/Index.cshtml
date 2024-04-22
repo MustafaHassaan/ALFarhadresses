@@ -1,0 +1,50 @@
+﻿@model IEnumerable<ALFarhadresses.Models.Orders>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<partial name="_Logo" />
+
+<table class="table table-dark" style="width: 97%; margin-right: 20px; margin-left: 23px; margin-bottom: 157px;">
+    <thead>
+        <tr>
+            <th>
+                Payment
+            </th>
+            <th>
+                Date
+            </th>
+            <th>
+                ShipAddress
+            </th>
+            <th>
+                Details
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (ViewBag.Pur != null)
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Payment)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShipAddress)
+                    </td>
+
+                    <td>
+                            <a asp-action="Details" asp-route-id="@item.Id" style="color:white;text-decoration:none;">
+                                <i class="fas fa-calendar-week" style="color:white;text-decoration:none;"></i>
+                            </a>
+                    </td>
+                </tr>
+            }
+        }
+        </tbody>
+</table>

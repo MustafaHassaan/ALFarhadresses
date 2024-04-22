@@ -1,0 +1,183 @@
+﻿@model List<ALFarhadresses.Models.Products>
+@{
+    ViewData["Title"] = "Cart";
+}
+@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment _env;
+@inject ALFarhadresses.Models.ALFarhadressesContext _Con;
+<partial name="_Logo" />
+<center>
+    @if (ViewBag.Msg != null)
+    {
+        <div class="alert alert-dark" role="alert" style="width:200px;">
+            @ViewBag.Msg
+        </div>
+    }
+
+</center>
+<form method="post" asp-action="Cart" asp-controller="Cart">
+    <table class="table table-dark" style="width: 97%; margin-right: 20px; margin-left: 23px; margin-bottom: 157px;">
+        <thead>
+            <tr>
+                <th scope="col">Photo</th>
+                <th scope="col">Discriebtion</th>
+                <th scope="col">
+                    <center>
+                        Quantity
+                    </center>
+                </th>
+                <th scope="col">
+                    <center>
+                        Price
+                    </center>
+                </th>
+                <th scope="col">
+                    <center>
+                        Sub Tottal
+                    </center>
+                </th>
+                <th scope="col">Del Order</th>
+            </tr>
+        </thead>
+        <tbody id="b">
+            @{
+                decimal Tottal = 0;
+
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr id="rec-1">
+                        <th scope="row">
+                            <a asp-action="opencart" asp-controller="Home" asp-route-id="@Model[i].Id">
+                                @{
+
+                                    string folder = _env.ContentRootPath +
+                                        "/wwwroot/Dresses/" + Model[i].Id;
+
+                                    if (System.IO.Directory.Exists(folder))
+                                    {
+                                        string[] filesinDir = System.IO.Directory.GetFiles(folder);
+                                        for (int j = 0; j < filesinDir.Length; j++)
+                                        {
+                                            System.IO.FileInfo fileinfo = new System.IO.FileInfo(filesinDir[j]);
+
+                                            <img class="img-thumbnail" width="100px" height="100px" src="~/Dresses/@Model[i].Id/@fileinfo.Name" alt="">
+
+                                            break;
+                                        }
+                                    }
+
+                                }
+                            </a>
+                        </th>
+                        <td>
+                            <input type="hidden" name="ExistCart" value="@Model[i].Id" />
+                            @Model[i].Description
+                        </td>
+                        <td>
+                            <center>
+                                @Model[i].Quantity
+                            </center>
+                        </td>
+                        <td>
+                            <center>
+                                @Model[i].Price
+                            </center>
+                        </td>
+                        <td>
+                            <center>
+                                @{
+                                    var SubTottal = Model[i].Price * Model[i].Quantity;
+                                    Tottal += SubTottal;
+                                }
+                                @SubTottal
+                            </center>
+                        </td>
+
+                        <td>
+                            <a asp-action="DeleteFromCart" asp-controller="Cart" asp-route-id="@Model[i].Id" class="btn btn-xs delete-record" data-id="1" style="margin-left: 10px;">
+                                <i class="fa fa-trash" style="color:white"></i>
+                            </a>
+                        </td>
+
+
+                    </tr>
+
+                }
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <input type="hidden" value="@ViewBag.userId" name="Custid" />
+                    </td>
+                    <td colspan="2">
+                        <center>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                <span class="badge badge-light">@Tottal</span>
+                                Make Order
+                            </button>
+                            <!-- Modal -->
+                        </center>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-dark">
+                    <h5 class="modal-title" id="exampleModalCenterTitle" style="color: white;">Payment Method</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" style="color: white;">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class="container">
+                        <form action="#">
+                            <div class="row stock-images">
+                                <div class="col s6 m3">
+                                    <h3>Cash</h3>
+                                    <input id="test4" name="Payment" type="radio" value="Cash" hidden /><label for="test4">
+                                        <div class="image" style="background-image:url(/Cash.png)"></div>
+                                    </label>
+                                </div>
+                                <div class="col s6 m3">
+                                    <h3>Visa</h3>
+                                    <input id="test5" name="Payment" type="radio" value="Visa" hidden /><label for="test5">
+                                        <div class="image" style="background-image:url(/Visa.png)"></div>
+                                    </label>
+                                </div>
+                            </div>
+                            <center>
+
+                                <button type="submit" class="btn btn-primary">
+                                    <span>Confirm</span>
+                                    <span class="badge badge-light">@Tottal</span>
+                                    <input type="hidden" value="@Tottal" name="Tottal" />
+                                </button>
+                            </center>
+                        </form>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal -->
+</form>
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,53 @@
+﻿@model ALFarhadresses.Areas.Role.Data.Login
+@{
+    ViewData["Title"] = "Login";
+}
+<style>
+    .item {
+        color: ThreeDDarkShadow;
+        text-decoration: none;
+    }
+
+        .item:hover {
+            color: red;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    .form-check-label {
+        color: ThreeDDarkShadow;
+    }
+
+        .form-check-label:hover {
+            color: red;
+            cursor: pointer;
+        }
+</style>
+<partial name="_Logo" />
+<form asp-action="Login" method="post">
+    <center>
+        <div class="form-group" style="width:350px;">
+            @if (ViewBag.Msg != null)
+            {
+                <div class="alert alert-danger" role="alert" style="width:200px;">
+                    @ViewBag.Msg
+                </div>
+            }
+            <div class="form-group">
+                <label asp-for="Email" for="exampleDropdownFormEmail1" style="margin-right:200px;">Email address</label>
+                <input asp-for="Email" type="email" class="form-control" placeholder="email@example.com">
+                <span asp-validation-for="Email" style="color:red;"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" style="margin-right:250px;" for="exampleDropdownFormPassword1">Password</label>
+                <input asp-for="Password" type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+                <span asp-validation-for="Password" style="color:red;"></span>
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary">Login</button>
+            <div class="dropdown-divider"></div>
+            <a class="item" asp-area="Role" asp-controller="Account" asp-action="Signup">Sign up</a>
+            @*<a class="item" style="margin-top:-31px; margin-left:75px;" asp-area="Role" asp-controller="Account" asp-action="ForgetPassword">Forgot password?</a>*@
+        </div>
+    </center>
+</form>

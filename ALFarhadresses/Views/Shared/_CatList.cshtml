@@ -1,0 +1,15 @@
+﻿<div class="dropdown-menu dark bg-dark">
+    @inject ALFarhadressesContext _Con;
+    @{
+        var Categories = _Con.Categories.ToList();
+    }
+    @if (Categories != null)
+    {
+        foreach (var Cat in Categories)
+        {
+            <a class="dropdown-item" asp-action="Cat" asp-route-id="@Cat.Id">
+                @Cat.Name
+            </a>
+        }
+    }
+</div>

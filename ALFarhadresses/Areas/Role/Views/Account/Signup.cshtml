@@ -1,0 +1,115 @@
+﻿@model ALFarhadresses.Areas.Role.Data.Signup
+
+@{
+    ViewData["Title"] = "Signup";
+}
+<partial name="_Logo" />
+<form asp-area="Role" asp-controller="Account" asp-action="Signup" method="post">
+    <center>
+        @if (ViewBag.Msg != null)
+        {
+            <div class="alert alert-dark" role="alert" style="width:700px; color:white;">
+                @ViewBag.Msg
+            </div>
+        }
+        <div style="width: 50%; margin-top: 20px ; margin-bottom: 20px;">
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Cust.Fname" for="validationDefault01">First Name</label>
+                    <input asp-for="Cust.Fname" type="text" class="form-control" id="validationDefault01" placeholder="First name">
+                    <span asp-validation-for="Cust.Fname" style="color:red;"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Cust.Lname" for="validationDefault01">Last Name</label>
+                    <input asp-for="Cust.Lname" type="text" class="form-control" id="validationDefault01" placeholder="Last name">
+                    <span asp-validation-for="Cust.Lname" style="color:red;"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Cust.Phone" for="inputPassword3">Phone</label>
+                    <input asp-for="Cust.Phone" type="tel" class="form-control" id="inputPassword3" placeholder="Phone">
+                    <span asp-validation-for="Cust.Phone" style="color:red;"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Cust.Email" for="validationDefaultUsername">Email</label>
+                    <input asp-for="Cust.Email" type="email" class="form-control" id="validationDefaultUsername" placeholder="Email">
+                    <span asp-validation-for="Cust.Email" style="color:red;"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Cust.Password" for="inputPassword3">Password</label>
+                    <input asp-for="Cust.Password" type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                    <span asp-validation-for="Cust.Password" style="color:red;"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="ConfirmPassword" for="inputPassword3">Confirm Password</label>
+                    <input asp-for="ConfirmPassword" type="password" class="form-control" id="inputPassword3" placeholder="Confirm Password">
+                    <span asp-validation-for="ConfirmPassword" style="color:red;"></span>
+                </div>
+
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Cust.Gender" for="validationDefaultUsername">Gender</label>
+                    <select asp-for="Cust.Gender" class="form-control">
+                        <option selected disabled>Gender</option>
+                        <option value="Mal">Mal</option>
+                        <option value="Femal">Femal</option>
+                    </select>
+                    <span asp-validation-for="Cust.Gender" style="color:red;"></span>
+                </div>
+
+
+
+
+
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Cust.City" for="validationDefaultUsername">City</label>
+                    <select asp-for="Cust.City" class="form-control">
+                        <option selected disabled>City</option>
+                        <option value="Giza">Giza</option>
+                        <option value="Menia">Menia</option>
+                        <option value="Suze">Suze</option>
+                        <option value="Al-Aqsor">Al-Aqsor</option>
+                        <option value="Alexandria">Alexandria</option>
+                        <option value="Por said">Por said</option>
+                        <option value="Damietta">Damietta</option>
+                        <option value="Aswan">Aswan</option>
+                        <option value="Kaliobeya">Kaliobeya</option>
+                        <option value="Bani Sweif">Bani Sweif</option>
+                        <option value="Ismailia">Ismailia</option>
+                        <option value="Sohag">Sohag</option>
+                        <option value="Asyut">Asyut</option>
+                        <option value="Al bahr Al Ahmer">Al bahr Al Ahmer</option>
+                        <option value="El behaira">El behaira</option>
+                        <option value="Dakahlia">Dakahlia</option>
+                        <option value="Ghrbia">Ghrbia</option>
+                        <option value="Fayoum">Fayoum</option>
+                        <option value="Kafr ElShikh">Kafr ElShikh</option>
+                        <option value="Matrouh">Matrouh</option>
+                        <option value="Monoufia">Monoufia</option>
+                        <option value="El wady elgdid">El wady elgdid</option>
+                        <option value="6 October">6 October</option>
+                        <option value="Qena">Qena</option>
+                        <option value="Soyth Sinai">Soyth Sinai</option>
+                        <option value="North Sinai">North Sinai</option>
+                        <option value="Helwan">Helwan</option>
+                        <option value="Sharqiya">Sharqiya</option>
+                    </select>
+                    <span asp-validation-for="Cust.City" style="color:red;"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cust.Address">Address</label>
+                <textarea class="form-control" asp-for="Cust.Address" placeholder="Address"></textarea>
+                <span asp-validation-for="Cust.Address" style="color:red;"></span>
+            </div>
+            <br />
+            <button class="btn btn-primary" type="submit">
+                Confirm
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-save"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+            </button>
+
+
+        </div>
+
+    </center>
+</form>
